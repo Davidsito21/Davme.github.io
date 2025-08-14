@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ParaAyme</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('Aymesita.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #d63384;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.2em;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 95%;
+      max-width: 900px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .section h2 {
+      color: #d63384;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      max-width: 800px;
+      height: 500px;
+      margin: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 1.5em;
+      color: #d63384;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .nav.left { left: 10px; }
+    .nav.right { right: 10px; }
+
+    /* ======================= */
+    /* 🎵 Disco con surcos     */
+    /* ======================= */
+    .disco-wrapper {
+      margin-top: 30px;
+      display: grid;
+      place-items: center;
+    }
+
+    .disco-container {
+      width: 300px;
+      height: 300px;
+      position: relative;
+    }
+
+    .disco {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      transform-origin: center center;
+      background: radial-gradient(circle at center, #333 0%, #000 60%, #444 100%);
+      /* Animación de giro siempre definida pero en pausa por defecto */
+      animation: girar 3s linear infinite;
+      animation-play-state: paused; /* se activa con la clase .play */
+    }
+
+    /* Surcos finísimos, siempre por encima */
+    .disco::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        rgba(255,255,255,0.03) 0deg 0.3deg,
+        transparent 0.3deg 0.6deg
+      );
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Haz de luz difuso y animado */
+    .disco::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      width: 2%;
+      height: 200%;
+      background: rgba(255,255,255,0.15);
+      filter: blur(2px);
+      transform: translateX(-50%) rotate(45deg);
+      z-index: 1;
+      pointer-events: none;
+      animation: luz 6s ease-in-out infinite;
+    }
+
+    /* Etiqueta central por encima de los surcos */
+    .etiqueta {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      background-color: crimson;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      z-index: 3;
+    }
+
+    /* Estado de reproducción: la animación corre */
+    .disco.play { animation-play-state: running; }
+
+    @keyframes girar {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes luz {
+      0%   { transform: translateX(-50%) rotate(45deg) translateY(-200%); }
+      50%  { transform: translateX(-50%) rotate(45deg) translateY(200%); }
+      100% { transform: translateX(-50%) rotate(45deg) translateY(-200%); }
+    }
+
+    @media (max-width: 768px) {
+      .slider { height: 300px; }
+      .slides img { height: 300px; }
+      .disco-container { width: 220px; height: 220px; }
+      .etiqueta { width: 48px; height: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Gracias por siempre estar! 💝</h1>
+  <img src="Miles.jpg" alt="MilesYGwen" width="250" />
+
+  <div class="section">
+    <h2>📸 Us</h2>
+    <div class="slider" id="slider">
+      <div class="slides">
+        <img src="ayd.jpg" alt="Foto 1" />
+        <img src="dibujo2.png" alt="Foto 2" />
+        <img src="fallguys.jpg" alt="Foto 3" />
+        <img src="ittakes2.jpg" alt="Foto 4" />
+        <img src="ayme1.jpg" alt="Foto 5" />
+        <img src="dibujo1.png" alt="Foto 6" />
+        <img src="fallguys2.png" alt="Foto 7" />
+        <img src="fortnite.png" alt="Foto 8" />
+        <img src="ayme2.jpg" alt="Foto 9" />
+        <img src="fortnite2.png" alt="Foto 10" />
+        <img src="fallguys3.png" alt="Foto 11" />
+        <img src="fortnite3.png" alt="Foto 12" />
+        <img src="fortnite4.jpg" alt="Foto 13" />
+        <img src="dibujo3.png" alt="Foto 14" />
+      </div>
+      <div class="nav left" onclick="moveSlide(-1)">❮</div>
+      <div class="nav right" onclick="moveSlide(1)">❯</div>
+    </div>
+  </div>
+
+  <!-- 🎵 Disco giratorio con surcos y luz, sincronizado con el audio -->
+  <div class="disco-wrapper">
+    <div class="disco-container">
+      <div class="disco" id="disco"></div>
+      <div class="etiqueta"></div>
+    </div>
+    <audio id="audio" autoplay loop>
+      <source src="Sunflower.mp3" type="audio/mpeg" />
+      Tu navegador no soporta el audio.
+    </audio>
+    <p style="margin-top:10px; color:#fff; text-shadow:0 1px 2px rgba(0,0,0,.6);">
+      ▶️ clic en el disco para Pausar
+    </p>
+  </div>
+
+  <script>
+    // Slider
+    let index = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = slides.children.length;
+    function moveSlide(direction) {
+      index = (index + direction + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    // Audio + Disco sincronizados
+    const audio = document.getElementById('audio');
+    const disco = document.getElementById('disco');
+
+    function syncDisco() {
+      if (!audio.paused) {
+        disco.classList.add('play');
+      } else {
+        disco.classList.remove('play');
+      }
+    }
+
+    audio.addEventListener('play', syncDisco);
+    audio.addEventListener('pause', syncDisco);
+    window.addEventListener('load', syncDisco);
+
+    // Click en el disco para alternar play/pause
+    disco.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+  </script>
+</body>
+</html>
